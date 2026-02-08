@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flabby, Be My Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #0a1a3a, #0f2a5f);
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Tap overlay */
+.overlay {
+  position: fixed;
+  inset:0;
+  background: rgba(10,26,58,0.96);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+.overlay button{
+  background: linear-gradient(135deg, #d4af37, #f1d27a);
+  border:none;
+  padding:18px 40px;
+  font-size:1.2em;
+  border-radius:45px;
+  font-weight:bold;
+  color:#0a1a3a;
+  box-shadow:0 10px 30px rgba(212,175,55,0.6);
+  cursor:pointer;
+  transition: transform 0.3s ease;
+}
+.overlay button:hover{ transform: scale(1.05); }
+
+/* Floating red hearts */
+.heart{
+  position:fixed;
+  bottom:-10px;
+  color:#ff1e1e;
+  animation: floatUp 8s linear infinite;
+}
+@keyframes floatUp{
+  to{
+    transform: translateY(-120vh) scale(1.6);
+    opacity:0;
+  }
+}
+
+/* Container card */
+.container{
+  max-width:420px;
+  margin:40px auto;
+  padding:30px 22px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border-radius:24px;
+  text-align:center;
+  border:1px solid rgba(212,175,55,0.35);
+  box-shadow:0 28px 50px rgba(0,0,0,0.45);
+}
+
+/* Image */
+img{
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #d4af37;
+}
+
+/* Handwriting name */
+.name{
+  font-family: 'Great Vibes', cursive;
+  font-size:3em;
+  color:#d4af37;
+  margin:14px 0 6px;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:3px solid #d4af37;
+  width:0;
+  animation:write 3.5s steps(30,end) forwards, blink .8s infinite;
+}
+@keyframes write{to{width:100%;}}
+@keyframes blink{50%{border-color:transparent;}}
+
+/* Poem */
+.poem{
+  font-style:italic;
+  line-height:1.85;
+  margin:20px 0;
+  color:#e6ecff;
+  font-size:1.05em;
+}
+
+/* Question */
+.question{
+  font-size:1.5em;
+  margin:22px 0 14px;
+  font-weight:bold;
+}
+
+/* Buttons */
+button.main{
+  background: linear-gradient(135deg, #d4af37, #f1d27a);
+  color: #0a1a3a;
+  border:none;
+  padding:15px 38px;
+  font-size:1.1em;
+  border-radius:40px;
+  font-weight:bold;
+  box-shadow:0 12px 30px rgba(212,175,55,0.55);
+  cursor:pointer;
+  opacity:0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+button.main.show{
+  opacity:1;
+  transform: translateY(0);
+}
+
+button.main:active{transform:scale(0.96);}
+
+.whatsapp{
+  margin-top:16px;
+  display:inline-block;
+  text-decoration:none;
+  background:#25D366;
+  color:white;
+  padding:12px 28px;
+  border-radius:30px;
+  font-weight:bold;
+  opacity:0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.whatsapp.show{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Secret message with pulsing glow */
+.secret{
+  display:none;
+  margin-top:20px;
+  padding:16px;
+  border-radius:16px;
+  background: rgba(212,175,55,0.15);
+  color:#ffd;
+  font-style:italic;
+  animation:fadeIn 1.5s ease forwards, pulseGlow 2s infinite alternate;
+}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+@keyframes pulseGlow{
+  from{
+    text-shadow: 0 0 4px #d4af37;
+  }
+  to{
+    text-shadow: 0 0 14px #ffd700;
+  }
+}
+
+/* Footer & Sender */
+.footer{margin-top:18px; font-size:0.9em;}
+.sender{margin-top:14px; font-size:1em; color:#d4af37; font-style:italic;}
+
+/* Responsive */
+@media(max-width:420px){.name{font-size:2.6em;}}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="overlay" id="overlay">
+  <button onclick="startExperience()">Tap to Begin ❤️</button>
+</div>
+
+<div class="container">
+  <img src="flabby.jpg" alt="Flabby">
+
+  <div class="name">Flabby</div>
+
+  <div class="poem">
+    Like soft blue skies kissed gently by gold light,  
+    You walked into my world and made it feel right.  
+    In every smile you give, my heartbeat aligns,  
+    A quiet little rhythm that forever is mine.  
+    <br><br>
+    You’re the calm in my chaos, the song in my soul,  
+    The piece I was missing that made my heart whole.  
+    If love had a language, my heart would confess—  
+    Choosing you, Flabby, is my happiest yes.
+  </div>
+
+  <div class="question">Will you be my Valentine? ❤️</div>
+
+  <button class="main" id="yesBtn" onclick="sayYes()">Yes, I Will ✨</button>
+
+  <br>
+
+  <a class="whatsapp" id="whatsappLink"
+     href="https://wa.me/?text=Flabby%20❤️%2C%20I%20just%20said%20YES%20to%20being%20your%20Valentine.%20You%20mean%20more%20to%20me%20than%20words%20can%20say%20💛"
+     target="_blank">
+     Send this to you 💌
+  </a>
+
+  <div class="secret" id="secretMessage">
+    This part is just between us…  
+    Loving you isn’t a moment, Flabby —  
+    it’s a decision I’d make again in every lifetime. ❤️
+  </div>
+
+  <div class="footer">Made with love, just for you 🌙</div>
+  <div class="sender">— With love, Derrick ❤️</div>
+</div>
+
+<script>
+function startExperience(){
+  document.getElementById("overlay").style.display="none";
+  document.getElementById("music").play();
+  // Animate button and WhatsApp link
+  setTimeout(()=>{
+    document.getElementById("yesBtn").classList.add("show");
+    document.getElementById("whatsappLink").classList.add("show");
+  }, 500);
+}
+
+// Floating red hearts
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=Math.random()*18+14+"px";
+  h.style.animationDuration=Math.random()*3+6+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),9000);
+},500);
+
+// Reveal secret message on YES
+function sayYes(){
+  document.getElementById("secretMessage").style.display="block";
+}
+</script>
+
+</body>
+</html>
